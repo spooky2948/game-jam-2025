@@ -4,6 +4,12 @@ class_name Player
 #preloaded scenes:
 #signals
 
+enum PlayerState {
+	NORMAL,
+	DASH,
+	IN_PLACE,
+}
+
 #Physics Related Attributes
 const SPEED = 400.0
 const DASH_SPEED = 1500.0
@@ -12,13 +18,11 @@ const ACCELERATION = 3500
 const DECELERATION = 5000
 const AIR_DECEL = 1000
 
-var double_jump: bool = false 
+var double_jump: bool = false #determines whether the player can double jump
 var can_dash: bool = true #determines whether the player can dash or not
 var last_direction: int #last_direction tells you which direction the player was in last.
-var lock_dash: bool = false #locks the velocity when dashing.
-var has_control:bool = true #bool which determines whether the player has control over the character 
-var is_in_place: bool = false #if the player is NOT in control and is IN place, then it will not change its x or y dir.
-var coyote_jump: bool = false
+var coyote_jump: bool = false #allows the player leeway on a ground jump if they have just left the floor 
+var state: PlayerState = PlayerState.NORMAL
 
 #Player Character Attributes (HP,MP)
 
@@ -26,7 +30,7 @@ func _ready():
 	pass
 
 func _physics_process(delta: float) -> void:
-	if has_control:
+	if state == PlayerState.NORMAL:
 		if not is_on_floor():
 			velocity += get_gravity() * delta
 			if coyote_jump and $CoyoteTimer.is_stopped():
@@ -60,20 +64,18 @@ func _physics_process(delta: float) -> void:
 		# handles dash.
 		if Input.is_action_just_pressed("Dash") and can_dash:
 			can_dash = false
-			lock_dash = true 
-			has_control = false
+			state = PlayerState.DASH
 			$DashCooldown.start(1) #adds a 1 second cooldown to dash 
-			$ControlCooldown.start(0.1)
 			$DashTimer.start(0.1) #makes the dash happen for 0.1 seconds 
 			print(get_last_motion())
-	
-	else:	
-		if lock_dash:
-			velocity.x = last_direction * DASH_SPEED 
-			velocity.y = 0
-		elif is_in_place:
-			velocity.x = 0
-			velocity.y = 0
+			
+	elif state == PlayerState.DASH:
+		velocity.x = last_direction * DASH_SPEED 
+		velocity.y = 0
+	elif state == PlayerState.IN_PLACE:
+		velocity.x = 0
+		velocity.y = 0
+
 	move_and_slide()
 
 func set_y_velocity(y):
@@ -82,14 +84,10 @@ func set_y_velocity(y):
 #when timer finishes, dash can happen again.
 func _on_dash_timer_timeout() -> void:
 	velocity.x = sign(velocity.x) * SPEED
-	lock_dash = false
+	state = PlayerState.NORMAL
 
 func _on_dashcooldown_timeout() -> void:
 	can_dash = true
-
-func _on_control_cooldown_timeout() -> void:
-	has_control = true
-	is_in_place = false
  
 func _on_coyote_timer_timeout() -> void:
 	coyote_jump = false

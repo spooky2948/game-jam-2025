@@ -26,13 +26,9 @@ one_shot = true
 [node name="DashCooldown" type="Timer" parent="."]
 one_shot = true
 
-[node name="ControlCooldown" type="Timer" parent="."]
-one_shot = true
-
 [node name="CoyoteTimer" type="Timer" parent="."]
 one_shot = true
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dashcooldown_timeout"]
-[connection signal="timeout" from="ControlCooldown" to="." method="_on_control_cooldown_timeout"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

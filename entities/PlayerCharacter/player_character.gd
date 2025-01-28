@@ -11,11 +11,11 @@ enum PlayerState {
 }
 
 #Physics Related Attributes
-const SPEED = 400.0
+const SPEED = 500.0 #was 400
 const DASH_SPEED = 1500.0
-const JUMP_VELOCITY = -500.0
-const ACCELERATION = 3500
-const DECELERATION = 5000
+const JUMP_VELOCITY = -700.0
+const ACCELERATION = 5000
+const DECELERATION = 7000
 const AIR_DECEL = 1000
 
 var double_jump: bool = false #determines whether the player can double jump

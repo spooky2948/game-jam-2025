@@ -11,12 +11,21 @@ enum PlayerState {
 }
 
 #Physics Related Attributes
+<<<<<<< HEAD
 const SPEED = 500.0 #was 400
 const DASH_SPEED = 1500.0
 const JUMP_VELOCITY = -700.0
 const ACCELERATION = 5000
 const DECELERATION = 7000
 const AIR_DECEL = 1000
+=======
+const SPEED = 1400.0
+const DASH_SPEED = 2500.0
+const JUMP_VELOCITY = -3500.0
+const ACCELERATION = 10000
+const DECELERATION = 13000
+const AIR_DECEL = 3000
+>>>>>>> tilemap-test
 
 var double_jump: bool = false #determines whether the player can double jump
 var can_dash: bool = true #determines whether the player can dash or not

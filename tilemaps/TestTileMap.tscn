@@ -1,6 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://6jlfnghtpjth"]
+[gd_scene load_steps=4 format=3 uid="uid://bxy4u5v2nkgcc"]
 
-[ext_resource type="TileSet" uid="uid://dqcv50lan62xf" path="res://tilemaps/TestTileSet.tres" id="1_bxf3t"]
+[ext_resource type="Texture2D" uid="uid://jb0ln6r0yfwf" path="res://sprites/glass_tile_sheet.png" id="1_bdijq"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ts30i"]
+texture = ExtResource("1_bdijq")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 32, 32, -32, 32, 32)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 0, -32, 32, 32, 32, 32, 0)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 0, 0, 0, 0, 16, 0, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_gws3j"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_ts30i")
 
 [node name="TestTileMap" type="TileMapLayer"]
-tile_set = ExtResource("1_bxf3t")
+tile_set = SubResource("TileSet_gws3j")

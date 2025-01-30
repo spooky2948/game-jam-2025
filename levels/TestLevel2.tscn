@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_57ipy"]
 [ext_resource type="PackedScene" uid="uid://c64vn37hu4m21" path="res://entities/PlayerCharacter/PlayerCharacter.tscn" id="1_yayok"]
-[ext_resource type="PackedScene" uid="uid://6jlfnghtpjth" path="res://tilemaps/TestTileMap.tscn" id="2_1mmoy"]
+[ext_resource type="PackedScene" uid="uid://bxy4u5v2nkgcc" path="res://tilemaps/TestTileMap.tscn" id="2_1mmoy"]
 [ext_resource type="PackedScene" uid="uid://dux6ndqiuvmt8" path="res://entities/LevelEnd/level_end.tscn" id="4_3o57y"]
 
 [node name="TestLevel2" type="Node2D"]
@@ -18,4 +18,4 @@ tile_map_data = PackedByteArray("AAAGAA4AAQAAAAAAAAAHAA4AAQAAAAAAAAAIAA4AAQAAAAA
 
 [node name="LevelEnd" parent="." instance=ExtResource("4_3o57y")]
 position = Vector2(-91, 164)
-new_level = "TestLevel"
+new_level = "TestLevel3"
